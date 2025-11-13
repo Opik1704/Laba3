@@ -13,6 +13,7 @@ def main() -> None:
     result = power_function(target=target, power=degree)
 
     print(result)
+    print("result")
 
     print(SAMPLE_CONSTANT)
 
