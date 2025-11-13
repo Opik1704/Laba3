@@ -1,5 +1,15 @@
-from src.power import power_function
-from src.constants import SAMPLE_CONSTANT
+from power import factorial_easy
+from power import factorial_tree
+from power import factorial_recursive
+from power import fibonaci
+from power import fibonaci_recursive
+from power import bubble_sort
+from power import quick_sort
+from power import counting_sort
+
+from power import radix_sort
+from power import bucket_sort
+from power import heap_sort
 
 
 def main() -> None:
@@ -7,15 +17,27 @@ def main() -> None:
     Обязательнная составляющая программ, которые сдаются. Является точкой входа в приложение
     :return: Данная функция ничего не возвращает
     """
+    mas = [9,7,11,10,13,12,14,15,1488,156,5]
 
-    target, degree = map(int, input("Введите два числа разделенные пробелом: ").split(" "))
+    #не подходит для больших чисел
+    print(factorial_easy(5))
 
-    result = power_function(target=target, power=degree)
+    #не подходит для больших чисел
+    print(factorial_recursive(5))
 
-    print(result)
-    print("result")
+    #подходит для больших чисел
+    print(factorial_tree(5))
 
-    print(SAMPLE_CONSTANT)
+    print(fibonaci(10))
 
+    print(fibonaci_recursive(10))
+
+    print(bubble_sort(mas))
+    mas = [9,7,11,10,13,12,14,15,1488,156,5]
+    print(quick_sort(mas))
+    mas = [9,7,11,10,13,12,14,15,1488,156,5]
+    print(counting_sort(mas))
+    mas = [9,7,11,10,13,12,14,15,1488,156,5]
+    print(radix_sort(mas))
 if __name__ == "__main__":
     main()
