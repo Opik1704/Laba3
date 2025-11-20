@@ -1,3 +1,6 @@
+import heapq
+
+
 def factorial_easy(number: int) -> int:
     f = 1
     while number > 1:
@@ -81,9 +84,35 @@ def radix_sort(arr):
         bins = [[] for _ in range(10)]
     return arr
 
-def bucket_sort(a)->int:
-        pass
-def heap_sort(a)->int:
-        pass
+
+def bucket_sort(a,buckets):
+    if not a:
+        return []
+    if len(a) == 1:
+        return a
+    if buckets is None:
+        buckets = len(a)
+    min_val = min(a)
+    max_val = max(a)
+    if min_val == max_val:
+        return a
+    bucket_list = [[] for _ in range(buckets)]
+    range_val = max_val - min_val
+    for num in a:
+        normalized = (num - min_val) / range_val
+        bucket_index = int(normalized * buckets)
+        bucket_index = min(bucket_index, buckets - 1)
+        bucket_list[bucket_index].append(num)
+    result = []
+    for bucket in bucket_list:
+        if bucket:  # Сортируем только непустые корзины
+            result.extend(sorted(bucket))
+    return result
+def heap_sort(a):
+    heapq.heapify(a)
+    sorted_list = []
+    while a:
+        sorted_list.append(heapq.heappop(a))
+    return sorted_list
 
     
