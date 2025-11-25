@@ -1,19 +1,30 @@
 import heapq
-
-
-def factorial_easy(number: int) -> int:
+from sys import setrecursionlimit
+setrecursionlimit(10000000)
+def factorial_easy(number: int):
+    """
+       Вычисление факториала итеративным методом
+       Получает number
+       возвращает факториал числа number
+    """
+    if number < 0:
+        raise ValueError("Факториал только для натуральнх чисел чисел")
     f = 1
     while number > 1:
         f = f * number
         number = number - 1
     return f
 def factorial_tree(n:int):
+    """
+        Вычисление факториала методом деревьев, крутой алгоритм вррррр
+        Получает number
+        возвращает факториал числа number
+       """
     if n < 0:
-        return 0
+        raise ValueError("Факториал только для натуральнх чисел чисел")
     if n == 0:
         return 1
     if n == 1 or n == 2:
-        print("Aaa")
         return n
     return FactTree(2, n)
 def FactTree(l,r):
@@ -26,12 +37,28 @@ def FactTree(l,r):
     m = (l + r) // 2
     return FactTree(l, m) * FactTree(m + 1, r)
 def factorial_recursive(n: int) -> int:
+    """
+        Вычисление факториала рекурсией
+        Получает number
+        возвращает факториал числа number
+       """
+    if n < 0:
+        raise ValueError("Факториал только для натуральнх чисел чисел")
     if n == 0:
+        return 1
+    elif n == 1:
         return 1
     else:
         return n * factorial_recursive(n-1)
 def fibonaci(n: int) -> int:
-    if n <= 0:
+    """
+    Вычисление n-го числа Фибоначчи итеративным методом
+    Получает n
+    Возвращает n-ое числа Фибоначчи
+    """
+    if n < 0:
+        raise ValueError("Число Фибоначчи определено только для натуральных  чисел")
+    elif n == 0:
         return 0
     elif n == 1:
         return 1
@@ -40,65 +67,101 @@ def fibonaci(n: int) -> int:
         a, b = b, a + b
     return b
 def fibonaci_recursive(n: int) -> int:
+    """
+        Вычисление n-го числа Фибоначчи рекурсией
+        Получает n
+        Возвращает n-ое числа Фибоначчи
+       """
     if n == 0:
         return 0
     if n < 0:
-        return "нет такого члена последовательности",n
+        raise ValueError("нет такого члена последовательности",n)
     if n == 1 or n == 2:  
         return 1
     else:  
         return (fibonaci_recursive(n-1) + fibonaci_recursive(n-2))  
-def bubble_sort(a):
-    for i in range(len(a)):
-        for j in range(i,len(a)):
-            if(a[i] > a[j]):
-                c = a[i]
-                a[i] = a[j]
-                a[j] = c
-    return a
+def bubble_sort(arr):
+    """
+      Пузырьковая сортировка
+      Получает массив arr
+      Возвращает сортированный массив arr
+      """
+    for i in range(len(arr)):
+        for j in range(i,len(arr)):
+            if(arr[i] > arr[j]):
+                c = arr[i]
+                arr[i] = arr[j]
+                arr[j] = c
+    return arr
 
-def quick_sort(a):
-    if len(a) <= 1:  
-        return a  
-    pivot = a[-1]
-    left = [x for x in a[:-1] if x < pivot]  
-    right = [x for x in a[:-1] if x >= pivot]  
+def quick_sort(arr):
+    """
+       Быстрая сортировка
+       Получает массив arr
+       Возвращает сортированный массив arr
+       """
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[-1]
+    left = [x for x in arr[:-1] if x < pivot]
+    right = [x for x in arr[:-1] if x >= pivot]
     return quick_sort(left) + [pivot] + quick_sort(right)  
 
-def counting_sort(a):
-    count_mas = [0] * (max(a) + 1)
-    for i in a:
+def counting_sort(arr):
+    """
+        Сортировка подсчетом
+        Получает массив arr
+        Возвращает массив res
+        """
+    if not arr:
+        return []
+    if len(arr) == 1:
+        return arr
+    count_mas = [0] * (max(arr) + 1)
+    for i in arr:
         count_mas[i] += 1
     res = []
     for i in range(len(count_mas)):
         res.extend([i] * count_mas[i])
     return res
-def radix_sort(arr):
-    max_digits = max(arr)
-    bins = [[] for _ in range(10)]
+def radix_sort(arr,base: int = 10):
+    """
+        Поразрядная сортировка
+        Получает массив arr и систему счисления base
+        Возвращает сортированный массив arr
+        """
+    if not arr:
+        return []
+
+    max_digits = max([len(str(x)) for x in arr])
+    bins = [[] for _ in range(base)]
     for i in range(0, max_digits):
         for x in arr:
-            digit = (x // 10 ** i) % 10
+            digit = (x // base ** i) % base
             bins[digit].append(x)
         arr = [x for queue in bins for x in queue]
-        bins = [[] for _ in range(10)]
+        bins = [[] for _ in range(base)]
     return arr
 
-
-def bucket_sort(a,buckets):
-    if not a:
+def bucket_sort(arr,buckets: int | None = None):
+    """
+       Ведерная сортировка
+       Получает массив arr
+       Возвращает сортированный массив result
+       """
+    if not arr:
         return []
-    if len(a) == 1:
-        return a
+    if len(arr) == 1:
+        return arr
     if buckets is None:
-        buckets = len(a)
-    min_val = min(a)
-    max_val = max(a)
+        buckets = len(arr)
+    min_val = min(arr)
+    max_val = max(arr)
     if min_val == max_val:
-        return a
+        return arr
     bucket_list = [[] for _ in range(buckets)]
     range_val = max_val - min_val
-    for num in a:
+    for num in arr:
         normalized = (num - min_val) / range_val
         bucket_index = int(normalized * buckets)
         bucket_index = min(bucket_index, buckets - 1)
@@ -108,11 +171,17 @@ def bucket_sort(a,buckets):
         if bucket:  # Сортируем только непустые корзины
             result.extend(sorted(bucket))
     return result
-def heap_sort(a):
-    heapq.heapify(a)
-    sorted_list = []
-    while a:
-        sorted_list.append(heapq.heappop(a))
-    return sorted_list
+
+def heap_sort(arr):
+    """
+        Heap сортировка
+        Получает массив arr
+        Возвращает сортированный массив result
+        """
+    heapq.heapify(arr)
+    result = []
+    while arr:
+        result.append(heapq.heappop(arr))
+    return result
 
     
