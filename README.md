@@ -21,8 +21,9 @@
   </pre>
 ## Реализованы 
 Все сортировки bubble_sort, quick_sort, counting_sort, radix_sort,bucket_sort, heap_sort
-Стек и Очередь на List
+Стек и Очередь на List (Medium)
 Cделан Leetcode
+Cделан CLI 
 
 ## Отчет с бенчмарками 
 ### Маленькие массивы (100 элементов)
