@@ -19,12 +19,12 @@
   ├── .pre-commit-config.yaml
   └── README.md
   </pre>
-#Реализованы 
+## Реализованы 
 Все сортировки bubble_sort, quick_sort, counting_sort, radix_sort,bucket_sort, heap_sort
 Стек и Очередь на List
 Cделан Leetcode
 
-#Отчет с бенчмарками 
+## Отчет с бенчмарками 
 Тип массива              Bubble    Quick     Counting  Radix     Bucket    Heap      
 Случайные                0.000221  0.000374  0.000026  0.000069  0.000067  0.000038  
 Почти отсортированный    0.000215  0.000571  0.000026  0.000045  0.000072  0.000040  
